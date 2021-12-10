@@ -33,6 +33,6 @@ jobs:
       - name: Publish package
         run: dotnet nuget push bin/Debug/*.nupkg
 
-      - run: gh api repos/${{ github.repository_owner }}/nuget-install/dispatches <<< '{"event_type":"build"}' --input -
-        env:
-          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+      - name: List packages
+        run: nuget list -source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+
